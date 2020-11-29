@@ -34,24 +34,71 @@ $ composer create-project topthink/think thinkphpT
 </IfModule>
 ```
 
-Ngingx
+Ngingx 
 
 ```
 server {
-	listen 80;
-	server_name  all.bjed.com;
-	root   "F:\www\asdata";
-	location / {
-		index  index.html index.htm index.php;
-		#autoindex  on;
-
-		# 新增内容开始
-		if (!-e $request_filename) {
-			rewrite  ^(.*)$  /index.php?s=/$1  last;
-			break;
-		}
-		# 新增内容结束
-	}
+        listen        80;
+        server_name  www.edu.com;
+        root   "D:/phpstudy_pro/WWW/thinkphpT";
+        location / {
+            index index.php index.html error/index.html;
+            if (!-e $request_filename) {
+         			rewrite  ^(.*)$  /index.php?s=/$1  last;
+         			break;
+         		}
+        }
+        location ~ \.php(.*)$ {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            fastcgi_param  PATH_INFO  $fastcgi_path_info;
+            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+            include        fastcgi_params;
+        }
 }
+
+```
+
+## 用PHPstudy创建网站
+
+新建网站创建数据库
+
+## 配置.env文件
+
+在项目根目录下建立.env文件
+
+```
+APP_DEBUG = false
+
+[APP]
+HOST=www.edu.com
+DEFAULT_TIMEZONE = Asia/Shanghai
+
+[DATABASE]
+TYPE = mysql
+HOSTNAME = 127.0.0.1
+DATABASE = edu
+USERNAME = edu
+PASSWORD = 123456
+HOSTPORT = 3306
+CHARSET = utf8
+DEBUG = true
+PREFIX = qing_
+
+[LANG]
+default_lang = zh-cn
+
+```
+
+## 导入已经建好的数据库
+
+mysql.sql
+
+## 配置多应用模式
+
+```
+composer require topthink/think-multi-app
 ```
 
