@@ -13,9 +13,19 @@ class Index
     public function hello($name = '传递参数测试')
     {
         return 'hello,' . $name.'这里是hello方法';}
-    public function viewtest()
+    public function viewtest1()
     {
 //    return View::fetch();
     return View::fetch('demo');
+    }
+    public function viewtest()
+    {
+     return View::fetch();
+
+    }
+    public function viewtest2()
+    {
+//    return View::fetch();
+        return view();
     }
 }

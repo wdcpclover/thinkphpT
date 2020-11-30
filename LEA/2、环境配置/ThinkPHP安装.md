@@ -70,7 +70,7 @@ server {
 在项目根目录下建立.env文件
 
 ```
-APP_DEBUG = false
+APP_DEBUG = true
 
 [APP]
 HOST=www.edu.com
@@ -94,7 +94,7 @@ default_lang = zh-cn
 
 ## 导入已经建好的数据库
 
-mysql.sql
+edu.sql
 
 ## 配置多应用模式
 
